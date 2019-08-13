@@ -1,6 +1,8 @@
 'use strict';
 const optArticleSelector = '.post',
-  optArticleTagsSelector = '.post-tags .list';
+  optArticleTagsSelector = '.post-tags .list',
+  optCloudClassCount = 5,
+  optCloudClassPrefix = 'tag-size-';
 
 function titleClickHandler(event) {
   console.log('klikniete', event);
@@ -68,6 +70,39 @@ for (let link of links) {
   link.addEventListener('click', titleClickHandler);
 }
 
+function calculateTagsParams(tags) {
+  const parms = {
+    max: 0,
+    min: 999999
+  };
+  for (let tag in tags) {
+    if (tags[tag] > parms.max) {
+      parms.max = tags[tag];
+    } else
+    if (tags[tag] < parms.max) {
+      parms.min = tags[tag];
+    }
+
+    console.log(tag + 'is used' + tags[tag] + 'times');
+  }
+  return parms;
+}
+
+function calculateTagClass(count, params) {
+  const normalizedCount = count - params.min;
+  const normalizedMax = params.max - params.min;
+  const percentage = normalizedCount / normalizedMax;
+  const classNumber = Math.floor(percentage * (optCloudClassCount - 1) + 1);
+  return optCloudClassPrefix + classNumber;
+}
+
+function calculateAuthorClass(count, params) {
+  const normalizedCount = count - params.min;
+  const normalizedMax = params.max - params.min;
+  const percentage = normalizedCount / normalizedMax;
+  const authorNumber = Math.floor(percentage * (optCloudAuthorCount - 1) + 1);
+  return optCloudAuthorPrefix + authorNumber;
+}
 /////////////////////
 function generateTags() {
   /* find all articles */
@@ -104,16 +139,12 @@ function generateTags() {
     const tagList = document.querySelector('.tags');
 
     /*[new] create variable for all links html code */
+    const tagsParams = calculateTagsParams(allTags);
+    console.log('tagsParams:', tagsParams);
     let allTagsHTML = '';
     for (let tag in allTags) {
-      allTagsHTML +=
-        '<li><a href="#tag-' +
-        tag +
-        '">' +
-        tag +
-        '(' +
-        allTags[tag] +
-        ')</a></li>';
+      allTagsHTML += ' <li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '"href="#tag-' + tag + '">' +
+        tag + ' (' + allTags[tag] + ') ' + '</a></li>';
     }
 
     tagList.innerHTML = allTagsHTML;
@@ -126,6 +157,7 @@ function generateTags() {
   /* insert HTML of all the links into the tags wrapper */
   /* END LOOP: for every article: */
 }
+
 generateTags();
 
 function tagClickHandler(event) {
