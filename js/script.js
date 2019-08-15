@@ -135,11 +135,8 @@ function generateTags() {
   let allTags = {};
 
   /* find all articles */
-
   const articles = document.querySelectorAll(optArticleSelector);
-
   /* START LOOP: for every article: */
-
   for (let article of articles) {
     const titleList = article.querySelector(optArticleTagsSelector);
     let html = '';
@@ -155,33 +152,25 @@ function generateTags() {
         allTags[tag]++;
       }
     }
-
     titleList.innerHTML = html;
   }
-
   /* [NEW] find list of tags in right column */
   const tagList = document.querySelector('.tags');
-
   /* create variable for all link HTML code */
   const tagsParams = calculateTagsParams(allTags);
   ///console.log('tagsParams', tagsParams);
   let allTagsHTML = '';
-
   /* start LOOP for each tag in allTags; */
-
   for (let tag in allTags) {
     /* generate code of a link and add it to allTagsHTML */
     allTagsHTML += ' <li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '"href="#tag-' + tag + '">' + tag + '  ' + '</a></li>';
   }
-
   /* end LOOP for each tag in allTags; */
 
   /* add html from allTagsHTML to tagList; */
   tagList.innerHTML = allTagsHTML;
 
 }
-
-
 generateTags();
 
 
@@ -243,7 +232,7 @@ function generateAuthors() {
   const AuthorParams = calculateTagsParams(allAuthors);
   let allAuthorssHTML = '';
   for (let articleAuthor in allAuthors) {
-    allAuthorssHTML += ' <li><a class="' + calculateAuthorClass(allAuthors[articleAuthor], AuthorParams) + '"href="#by' + articleAuthor + '">' + articleAuthor + '  ' + '</a></li>';
+    allAuthorssHTML += ' <li><a class="' + calculateAuthorClass(allAuthors[articleAuthor], AuthorParams) + '"href="#by' + articleAuthor + '">' + articleAuthor + ' (' + allAuthors[articleAuthor] + ') ' + '</a></li>';
 
   }
   authors.innerHTML = allAuthorssHTML;
@@ -268,10 +257,8 @@ function authorClickHandler(event) {
   generateTitleLinks('[data-author="' + authorHref + '"]');
 }
 
-
 function addClickListenersToAuthor() {
   const linkOfAuthors = document.querySelectorAll(optArticleAuthorSelector);
-
   for (let linkOfAuthor of linkOfAuthors) {
     linkOfAuthor.addEventListener('click', authorClickHandler);
   }
@@ -280,15 +267,11 @@ function addClickListenersToAuthor() {
 
 
 function addClickListenersToTags() {
-
-
   const linkOfTags = document.querySelectorAll(optTagsSelector); /* find all links to tags */
   const linkOfPostTags = document.querySelectorAll(optPostTagsSelector);
-
   for (let linkOfTag of linkOfTags) {
     linkOfTag.addEventListener('click', tagClickHandler);
   }
-
   for (let linkOfPostTag of linkOfPostTags) {
     linkOfPostTag.addEventListener('click', tagClickHandler);
   }
