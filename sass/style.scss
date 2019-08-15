@@ -135,28 +135,37 @@ body {
   text-decoration: none;
   font-size: 30px;
   color: red;
+  font-weight: 900;
 }
 
 .tag-size-4 {
   text-decoration: none;
   font-size: 25px;
   color: orangered;
+  font-weight: 900;
 }
 
 .tag-size-3 {
   text-decoration: none;
   font-size: 20px;
   color: yellowgreen;
+  font-weight: 900;
 }
 
 .tag-size-2 {
   text-decoration: none;
   font-size: 18px;
   color: blueviolet;
+  font-weight: 900;
 }
 
 .tag-size-1 {
   text-decoration: none;
   font-size: 15px;
   color: blue;
+  font-weight: 600;
+}
+
+.list.tags li {
+  display: inline;
 }
