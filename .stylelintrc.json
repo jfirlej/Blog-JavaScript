@@ -8,9 +8,22 @@
     "comment-empty-line-before": null,
     "declaration-colon-space-after": "always",
     "declaration-block-semicolon-newline-after": "always",
-    "declaration-block-trailing-semicolon": "always",
+
     "indentation": 2,
     "max-empty-lines": 2,
+    "declaration-colon-space-before": "never",
+    "function-comma-space-after": "always",
+    "function-url-quotes": "double",
+    "media-feature-colon-space-after": "always",
+    "media-feature-colon-space-before": "never",
+    "media-feature-name-no-vendor-prefix": true,
+
+    "number-leading-zero": "never",
+    "number-no-trailing-zeros": true,
+    "property-no-vendor-prefix": true,
+
+
+
     "max-nesting-depth": [
       3,
       {
